@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ajaxx page</title>
+</head>
+<body>
+	<div><h3>AJAX page (CORS POC)</h3></div>
+	<div><h4 id="name"></h4></div>
+	<button onclick="getname()" type="button">get name</button>
+
+	<script type="text/javascript">
+		const getname = () => {
+			//document.getElementById("name").innerHTML = "hello";
+			//console.log("making ajax req...");
+
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = () => {
+				//console.log(JSON.stringify(xhttp.readyState));
+				//console.log("method >> "+JSON.stringify(this.status));
+			    if (xhttp.readyState == 4) {
+			    	console.log("ready state is: 4");
+			    	if(xhttp.status == 200) {
+				    	console.log("here: "+ xhttp.status);
+				    	var name = xhttp.response;
+				    	document.getElementById("name").innerHTML = name;
+				    	//console.log("name >>> "+ this);
+				    }
+			    }
+
+			    // else {
+			    // 	console.log("wrong >>> "+ this.readyState);
+			    // }
+		  	};
+		  	xhttp.open("PUT", "http://127.0.0.1:4200/name");
+			xhttp.send({name: "sdf"});
+			//console.log("...done");
+
+		}
+	</script>
+</body>
+</html>
